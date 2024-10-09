@@ -10,7 +10,7 @@ from exchange.utils import save_exchange_rates, fetch_rate, date_range
 
 @shared_task
 def fetch_daily_exchange_rates():
-    providers = Provider.objects.all()
+    providers = Provider.objects.filter(is_active=True)
     for provider in providers:
         currencies = Currency.objects.all()
         exchange_provider = ExchangeRateProvider().get_adapter(provider_name=provider.name)

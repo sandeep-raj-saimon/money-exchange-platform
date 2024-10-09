@@ -12,7 +12,7 @@ class CurrencyView(View):
         symbol = request.GET.get("symbol")
         code = request.GET.get("code")
         name = request.GET.get("name")
-
+        id = request.GET.get("id")
         filter_params = {}
         if symbol:
             filter_params['symbol'] = symbol
@@ -20,6 +20,8 @@ class CurrencyView(View):
             filter_params['code'] = code
         if name:
             filter_params['name__icontains'] = name
+        if id:
+            filter_params['id'] = id
 
         currencies = Currency.objects.filter(**filter_params) if filter_params else Currency.objects.all()
 
