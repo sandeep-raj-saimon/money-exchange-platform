@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>Currency Converter</h1>
+
+<!-- Form action should point to the custom convert URL -->
+<form method="post" action="{% url 'admin:currency_converter' %}">
+    {% csrf_token %}
+    
+    <!-- Source Currency Dropdown -->
+    <label for="source_currency">Source Currency:</label>
+    <select name="source_currency" id="source_currency" required>
+        <option value="" disabled selected>Select source currency</option>
+        {% for currency in currencies %}
+            <option value="{{ currency.code }}">{{ currency.name }} ({{ currency.code }})</option>
+        {% endfor %}
+    </select>
+
+    <!-- Target Currency Dropdown -->
+    <label for="target_currency">Target Currency:</label>
+    <select name="target_currency" id="target_currency" required>
+        <option value="" disabled selected>Select target currency</option>
+        {% for currency in currencies %}
+            <option value="{{ currency.code }}">{{ currency.name }} ({{ currency.code }})</option>
+        {% endfor %}
+    </select>
+
+    <!-- Amount Input -->
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" id="amount" step="0.01" required>
+
+    <!-- Submit Button -->
+    <button type="submit">Convert</button>
+</form>
+
+<!-- Display converted amount if available -->
+{% if converted_amount %}
+    <h2>Converted Amount:</h2>
+    <p>{{ amount }} {{ source_currency.code }} = {{ converted_amount }} {{ target_currency.code }}</p>
+{% endif %}
+
+{% if exception %}
+    <script>
+        alert('{{exception}}')
+    </script>
+{% endif %}
+
+{% endblock %}
