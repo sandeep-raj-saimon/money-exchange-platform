@@ -33,7 +33,7 @@ def fetch_daily_exchange_rates():
 
 @shared_task
 async def load_historical_data(start_date, end_date):
-    currencies = ['USD', 'INR']
+    currencies = ['USD', 'INR', 'EUR', 'CHF', 'GBP']
     async with aiohttp.ClientSession() as session:
         for source_currency in currencies:
             for exchanged_currency in currencies:
