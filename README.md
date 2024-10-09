@@ -16,8 +16,10 @@ different curls are:
 get-rates api
 **curl --location 'http://127.0.0.1:8000/exchange/get-rates?source_currency=INR&exchanged_currency=EUR&start_date=2024-10-01&provider=currency_beacon&end_date=2024-10-10'**
 
+
 get currency API
 **curl --location 'http://127.0.0.1:8000/currency?symbol=Rs&code=INR&id=10'**
+
 
 post currency API
 **curl --location 'http://127.0.0.1:8000/currency/' \
@@ -27,6 +29,7 @@ post currency API
     "name": "GREAT BRITAIN",
     "symbol": "$"
 }'**
+
 
 put currency API
 **curl --location --request PUT 'http://127.0.0.1:8000/currency/?id=2' \
@@ -38,7 +41,11 @@ put currency API
     "symbol": "Rs"
 }'**
 
+
 delete currency API
+**curl --location --request DELETE 'http://127.0.0.1:8000/currency/?id=2'**
+
+
 
 convert amount api
 **curl --location --request GET 'http://127.0.0.1:8000/convert?source_currency=USD&target_currency=INR&amount=1000' \
@@ -48,6 +55,7 @@ convert amount api
     "name": "US Dollar",
     "symbol": "$"
 }'**
+
 
 7. admin view has been implemented for converting amounts, you will find the converter view in the currencies tab.
 8. admin view has been implemented for providers also, for their, you can create and set priority and mark it as active or in_active.
